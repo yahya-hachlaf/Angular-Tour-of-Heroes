@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
-import { HEROES } from '../mock-heroes';
+import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-heroes', // the component's CSS element selector
@@ -16,7 +16,7 @@ export class HeroesComponent implements OnInit {
     name: 'Windstorm'
   };
 
-  heroes = HEROES;
+  heroes: Hero[] = [];
 
   //  assign the clicked hero from the template to the component's selectedHero
   selectedHero?: Hero;
@@ -24,9 +24,17 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = hero;
   }
 
-  constructor() { }
+  constructor(private heroService: HeroService) {}
 
+  //call getHeroes() inside the ngOnInit lifecycle hook and let Angular call ngOnInit() 
+  //at an appropriate time after constructing a HeroesComponent instance.
   ngOnInit(): void {
+    this.getHeroes();
+  }
+
+  // getting heroes from the hero service 
+  getHeroes(): void {
+    this.heroes = this.heroService.getHeroes();
   }
 
 }

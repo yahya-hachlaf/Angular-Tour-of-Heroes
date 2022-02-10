@@ -1,3 +1,4 @@
+<!-- Display the Hero name and his details -->
 <h2>{{hero.name | uppercase}} Details</h2>
 <div><span>id: </span>{{hero.id}}</div>
 <div>
@@ -5,9 +6,25 @@
     <input id="name" [(ngModel)]="hero.name" placeholder="name"> <!-- two-data binding to let the user change the hero name and see it immediatlly -->
 </div>
 
+<!-- List of heroes -->
 <h2>My Heroes</h2>
 <ul class="heroes">
   <li *ngFor="let hero of heroes"> <!-- To have access to each individual hero and list them all -->
-    <span class="badge">{{hero.id}}</span> {{hero.name}}
+    <button [class.selected]="hero === selectedHero" type="button" (click)="onSelect(hero)"> <!-- it is better for accessibility purposes to use the native <button> element to handle clicks. -->
+        <span class="badge">{{hero.id}}</span>
+        <span class="name">{{hero.name}}</span>
+      </button> 
   </li>
 </ul>
+
+<!-- Display the selected Hero details only if he exists-->
+<div *ngIf="selectedHero">
+
+    <h2>{{selectedHero.name | uppercase}} Details</h2>
+    <div>id: {{selectedHero.id}}</div>
+    <div>
+      <label for="hero-name">Hero name: </label>
+      <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
+    </div>
+  
+  </div>

@@ -18,6 +18,12 @@ export class HeroesComponent implements OnInit {
 
   heroes = HEROES;
 
+  //  assign the clicked hero from the template to the component's selectedHero
+  selectedHero?: Hero;
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
+
   constructor() { }
 
   ngOnInit(): void {

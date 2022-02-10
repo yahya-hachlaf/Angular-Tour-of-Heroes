@@ -32,9 +32,17 @@ export class HeroesComponent implements OnInit {
     this.getHeroes();
   }
 
-  // getting heroes from the hero service 
+  // getting heroes from the hero service
+  // because of the asynchronous operation of calling fetchinf heroes 
+  // a server we need to change the returned value of heros as an observable
+  // so now the function waits for the Observable to emit the array of heroes—which 
+  // could happen now or several minutes from now.
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+
+    // The subscribe() method passes the emitted array to the callback, 
+    // which sets the component's heroes property.
+    this.heroService.getHeroes()
+        .subscribe(heroes => this.heroes = heroes);
   }
 
 }

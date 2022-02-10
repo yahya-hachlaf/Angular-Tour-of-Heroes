@@ -8,7 +8,7 @@ import { Hero } from '../hero';
 })
 export class HeroDetailComponent implements OnInit {
 
-  @Input() hero?: Hero;
+  @Input() hero?: Hero; // Input decorator make the hero propety available for binding by the external HeroesComponent
 
   constructor() { }
 

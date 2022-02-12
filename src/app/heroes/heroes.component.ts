@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-heroes', // the component's CSS element selector
@@ -11,25 +13,22 @@ import { HeroService } from '../hero.service';
 // Always export the component class so you can import it elsewhere ... like in the AppModule.
 export class HeroesComponent implements OnInit {
 
-  hero: Hero = {
-    id: 1,
-    name: 'Windstorm'
-  };
+  //  assign the clicked hero from the template to the component's selectedHero
+  selectedHero?: Hero;
 
   heroes: Hero[] = [];
 
-  //  assign the clicked hero from the template to the component's selectedHero
-  selectedHero?: Hero;
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-  }
-
-  constructor(private heroService: HeroService) {}
+  constructor(private heroService: HeroService, private messageService: MessageService) {}
 
   //call getHeroes() inside the ngOnInit lifecycle hook and let Angular call ngOnInit() 
   //at an appropriate time after constructing a HeroesComponent instance.
   ngOnInit(): void {
     this.getHeroes();
+  }
+
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+    this.messageService.add('HeroesComponent: Selected hero id=${hero.id}');
   }
 
   // getting heroes from the hero service

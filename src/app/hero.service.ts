@@ -16,11 +16,13 @@ export class HeroService {
   // into that property when it creates the HeroService.
   constructor(private messageService: MessageService) { }
 
-  // return the mock heroes
+  // fetch the mock heroes
   getHeroes(): Observable<Hero[]> {
     // of(HEROES) returns an Observable<Hero[]> 
     // that emits a single value, the array of mock heroes.
     const heroes = of(HEROES);
+    // send a message when the heroes are fetched
+    this.messageService.add('HeroService: fetched heroes');
     return heroes;
   }
 }

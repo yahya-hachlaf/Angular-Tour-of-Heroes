@@ -1,9 +1,14 @@
 <!-- List of heroes -->
 <h2>My Heroes</h2>
 <ul class="heroes">
-  <li *ngFor="let hero of heroes">
-    <a routerLink="/detail/{{hero.id}}">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
-    </a>
+  <li *ngFor="let hero of heroes"> <!-- To have access to each individual hero and list them all -->
+    <button [class.selected]="hero === selectedHero" type="button" (click)="onSelect(hero)"> <!-- it is better for accessibility purposes to use the native <button> element to handle clicks. -->
+        <span class="badge">{{hero.id}}</span>
+        <span class="name">{{hero.name}}</span>
+      </button> 
   </li>
 </ul>
+
+<!-- Bind the HeroesComponent.selectedHero to the element's hero property.
+     now the parent HeroesComponent control over the child HeroDetailComponent -->
+<app-hero-detail [hero]="selectedHero"></app-hero-detail> 

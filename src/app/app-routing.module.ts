@@ -10,6 +10,7 @@ const routes: Routes = [
     component: HeroesComponent // the component that the router should create when navigating to this route.
   },
   { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' } // To make the application navigate to the dashboard automatically 
 ];
 
 // add initializes the router and starts it listening for browser location changes.

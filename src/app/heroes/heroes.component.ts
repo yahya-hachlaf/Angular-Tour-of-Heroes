@@ -11,10 +11,7 @@ import { MessageService } from '../message.service';
 
 // Always export the component class so you can import it elsewhere ... like in the AppModule.
 export class HeroesComponent implements OnInit {
-
-  //  assign the clicked hero from the template to the component's selectedHero
-  selectedHero?: Hero;
-
+  
   heroes: Hero[] = [];
 
   constructor(private heroService: HeroService, private messageService: MessageService) {}
@@ -23,11 +20,6 @@ export class HeroesComponent implements OnInit {
   //at an appropriate time after constructing a HeroesComponent instance.
   ngOnInit(): void {
     this.getHeroes();
-  }
-
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-    this.messageService.add('HeroesComponent: Selected hero id=${hero.id}');
   }
 
   // getting heroes from the hero service
